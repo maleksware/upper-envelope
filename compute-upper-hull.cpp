@@ -202,22 +202,19 @@ vector<Point> get_upper_hull_of_2_lines(vector<Point> first_initial_line, vector
 
 
   while (all_points[p1].next_point != -1 && all_points[p2].next_point != -1) {
-    cout << p1 << " " << p2 << " " << c << endl;
+    // cout << p1 << " " << p2 << " " << c << endl;
   
     if (all_points[all_points[p2].next_point].x != coords[c + 1]) {
       Point intersection = find_intersection(all_points[p2], all_points[all_points[p2].next_point], coords[c + 1]);
       intersection.next_point = all_points[p2].next_point;
       all_points[p2].next_point = all_points.size(); // после добавления индекс будет правильный
       all_points.push_back(intersection);
-      cout << "P2" << endl;
-      continue;
+      
     } else if (all_points[all_points[p1].next_point].x != coords[c + 1]) {
       Point intersection = find_intersection(all_points[p1], all_points[all_points[p1].next_point], coords[c + 1]);
       intersection.next_point = all_points[p1].next_point;
       all_points[p1].next_point = all_points.size(); // после добавления индекс будет правильный
       all_points.push_back(intersection);
-      cout << "P1" << endl;
-      continue;
     }
 
     p1 = all_points[p1].next_point;
@@ -235,7 +232,7 @@ vector<Point> get_upper_hull_of_2_lines(vector<Point> first_initial_line, vector
   cout << "COMPUTING INTERSECTIONS" << endl;
 
   while (all_points[p1].next_point != -1 && all_points[p2].next_point != -1) {
-    cout << p1 << " " << p2 << endl;
+    // cout << p1 << " " << p2 << endl;
     // Найдем самую высокую точку:
     if (all_points[p1].y < all_points[p2].y) {
       swap(p1, p2);
