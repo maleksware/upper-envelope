@@ -101,6 +101,11 @@ Point intersect_segments(Segment a, Segment b) {
 }
 
 
+bool eq(ld a, ld b) {
+  return (abs(a - b) < eps);
+}
+
+
 vector<ld> merge(vector<ld>& a, vector<ld>& b) {
   vector<ld> result;
   while (!a.empty() || !b.empty()) {
@@ -126,16 +131,11 @@ vector<ld> merge(vector<ld>& a, vector<ld>& b) {
   new_result.push_back(result[0]);
   
   for (int i = 1; i < result.size(); i++) {
-    if (result[i] == new_result.back()) continue;
+    if (eq(result[i], new_result.back())) continue;
     new_result.push_back(result[i]);
   }
   
   return new_result;
-}
-
-
-bool eq(ld a, ld b) {
-  return (abs(a - b) < eps);
 }
 
 
@@ -161,10 +161,6 @@ vector<Point> get_upper_hull_of_2_lines(vector<Point> first_initial_line, vector
   coords = merge(line_1, line_2); // получили отсортированный массив x-координат всех точек обеих ломаных (ключевые точки)
 
   // 2. Пройти по отрезкам и представить их в виде точек (выгодно хранить отрезки в виде точек с индексом на следующую точку)
-
-  Point cur_point_1 = first_initial_line[0];
-  Point cur_point_2 = second_initial_line[0];
-  // запомнили первые точки, чтобы не пришлось сортировать массив с точками (ведь порядок будет определен ссылками из точек на следующие)
 
   vector<Point> all_points;
 
@@ -249,6 +245,8 @@ vector<Point> get_upper_hull_of_2_lines(vector<Point> first_initial_line, vector
     p2 = all_points[p2].next_point;
   }
 
+
+  // добавляем последнюю точку, потому что она не обрабатывается в цикле
   if (all_points[p1].y > all_points[p2].y) {
     raw_env.push_back(all_points[p1]);
   } else {
@@ -274,17 +272,14 @@ vector<Point> get_upper_hull_of_2_lines(vector<Point> first_initial_line, vector
     env.push_back(p_c);
   }
 
-  cout << "ENVELOPE READY!!!" << endl;
-
   return env;
 }
 
 
 int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0).
   freopen("data/lines.txt", "r", stdin);
-
-  vector<Point> line_a;
-  vector<Point> line_b;
 
   string s;
 
@@ -334,6 +329,8 @@ int main() {
     fo << p.x << ',' << p.y << endl;
   }
   fo.close();
+
+  cout << "done." << endl;
 
   return 0;
 }
