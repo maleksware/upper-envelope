@@ -209,7 +209,6 @@ vector<Point> get_upper_hull_of_2_lines(vector<Point> first_initial_line, vector
       intersection.next_point = all_points[p2].next_point;
       all_points[p2].next_point = all_points.size(); // после добавления индекс будет правильный
       all_points.push_back(intersection);
-      
     } else if (all_points[all_points[p1].next_point].x != coords[c + 1]) {
       Point intersection = find_intersection(all_points[p1], all_points[all_points[p1].next_point], coords[c + 1]);
       intersection.next_point = all_points[p1].next_point;
