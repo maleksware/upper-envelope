@@ -1,7 +1,7 @@
 import random
 
-n = 1000
-max_line_length = 1000
+n = 100
+max_line_length = 50
 
 min_y = 0
 max_y = 10000
@@ -17,6 +17,9 @@ for _ in range(n):
 
     for i in range(random.randint(2, max_line_length)):
         line.append((random.randint(min_x + 1, max_x - 1), random.randint(min_y, max_y)))
+
+        if line[-1][0] > (max_x / max_line_length) and line[-2][0] > (max_x / max_line_length): break
+
         min_x = line[-1][0]
         if min_x == max_x - 1: break
 
