@@ -224,8 +224,6 @@ vector<Point> get_upper_hull_of_2_lines(vector<Point> first_initial_line, vector
   p1 = 0;
   p2 = first_initial_line.size();
 
-  cout << "COMPUTING INTERSECTIONS" << endl;
-
   while (all_points[p1].next_point != -1 && all_points[p2].next_point != -1) {
     // cout << p1 << " " << p2 << endl;
     // Найдем самую высокую точку:
@@ -278,7 +276,7 @@ vector<Point> get_upper_hull_of_2_lines(vector<Point> first_initial_line, vector
 
 int main() {
   ios::sync_with_stdio(false);
-  cin.tie(0).
+  cin.tie(0);
   freopen("data/lines.txt", "r", stdin);
 
   string s;
