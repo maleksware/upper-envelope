@@ -4,7 +4,6 @@ plt.figure(figsize=(5, 4))
 plt.title("Lines")
 
 
-
 def parse_data_into_points(filename, scan_num=True):
     with open(filename, "r") as fin:
         data = fin.readlines()
@@ -29,6 +28,7 @@ def parse_data_into_points(filename, scan_num=True):
 
     return lines
 
+
 def plot_lines(lines, connect=True):
     for line in lines:
         x = []
@@ -44,8 +44,6 @@ def plot_lines(lines, connect=True):
 
 lines = parse_data_into_points("data/lines.txt")
 pts_res = parse_data_into_points("data/result.txt", scan_num=False)
-print(lines)
-print(pts_res)
 
 plot_lines(lines)
 plot_lines(pts_res)
