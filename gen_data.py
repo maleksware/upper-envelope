@@ -22,12 +22,6 @@ def gen_random_data(num_lines=100, max_line_length=1000, max_coordinate=10000, f
             if min_x == max_x - 1: break
 
         line.append((max_x, random.randint(min_y, max_y)))
-
-
-        for i in range(len(line)):
-            line[i][0] = float(line[i][0])
-            line[i][1] = float(line[i][1])
-
         lines.append(line)
 
     if file:
