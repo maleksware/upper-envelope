@@ -9,7 +9,6 @@ using ll = long long;
 using ld = long double;
 
 ll inf = 1e9;
-
 const ld eps = 10e-6;
 
 struct Point {
@@ -26,12 +25,6 @@ struct Point {
 
 struct Vector {
     ld x, y;
-    ld length_sq() const {
-        return x * x + y * y;
-    }
-    ld length() const {
-        return sqrt(length_sq());
-    }
 };
 
 
@@ -78,17 +71,6 @@ Line line_by_points(Point n, Point m) {
 struct Segment {
   Point a, b;
 };
-
-
-bool contains(Segment s, Point p) {
-  if (vbp(s.a, p) % vbp(s.b, p) == 0) {
-    if (vbp(s.a, p) * vbp(s.b, p) <= 0) {
-      return true;
-    }
-  }
-
-  return false;
-}
 
 
 Line line_by_segment(Segment s) {
@@ -273,6 +255,16 @@ vector<Point> get_upper_hull_of_2_lines(vector<Point> first_initial_line, vector
   return env;
 }
 
+vector<Point> get_upper_hull(vector<vector<Point>> lines) {
+  vector<Point> result = get_upper_hull_of_2_lines(lines[0], lines[1]);
+
+  for (int i = 2; i < lines.size(); i++) {
+    result = get_upper_hull_of_2_lines(result, lines[i]);
+  }
+
+  return result;
+}
+
 
 int main() {
   ios::sync_with_stdio(false);
@@ -315,11 +307,7 @@ int main() {
     }
   }
 
-  vector<Point> result = get_upper_hull_of_2_lines(lines[0], lines[1]);
-
-  for (int i = 2; i < NUMBER_OF_LINES; i++) {
-    result = get_upper_hull_of_2_lines(result, lines[i]);
-  }
+  vector<Point> result = get_upper_hull(lines);
 
   ofstream fo;
   fo.open("data/result.txt");
